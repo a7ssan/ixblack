@@ -313,7 +313,7 @@ message.channel.send('#credits')
   }
 });
 
-client4.on('message', message => {
+client14.on('message', message => {
   if (message.author.id !== '515833534523506699') return;
   if (message.content === '14d') {
 message.channel.send('#daily')
@@ -346,6 +346,22 @@ message.channel.send('#credits')
 });
 
 client16.on('message', message => {
+  if (message.author.id !== '515833534523506699') return;
+  if (message.content === '16d') {
+message.channel.send('#daily')
+  }
+  if (message.author.id !== '515833534523506699') return;
+  if(message.content === '16c'){
+message.channel.send('#credits')
+  }
+  if (message.author.id !== '515833534523506699') return;
+  if(message.content.startsWith("16say")) {
+    var text = message.content.split(' ').slice(1).join(' ');
+     message.channel.send(text);
+  }
+});
+
+client17.on('message', message => {
   if (message.author.id !== '515833534523506699') return;
   if (message.content === '17d') {
 message.channel.send('#daily')
