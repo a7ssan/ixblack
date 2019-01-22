@@ -1,14 +1,28 @@
-const Discord = require("discord.js");
-const errors = require("../utils/errors.js");
+const Discord = require('discord.js');
+const fs = require('fs');
+let prefixes = JSON.parse(fs.readFileSync("./Storage/prefixes.json", "utf8"));
 
-module.exports.run = async (bot, message, args) => {
+module.exports.run = async (client, message, args, color, langUsing) => {
 
-  message.delete();
-  if(!message.member.hasPermission("MANAGE_MESSAGES")) return errors.noPerms(message, "MANAGE_MESSAGES");
-  let botmessage = args.join(" ");
-  message.channel.send(botmessage);
-}
+  let language = require(`../messages/messages_${langUsing}.json`);
+
+  let argresult = args.join(" ");
+
+  // if no args
+
+  if(!args[0]) {
+
+    let noArgumentsMessage = language["say"].noArguments;
+    const noArguments = noArgumentsMessage.replace("${prefix}", prefixes[message.guild.id].prefixes);
+
+    message.channel.send(`${noArguments}`);
+    return;
+
+  };
+
+  message.channel.send(`${argresult}`);
+};
 
 module.exports.help = {
-  name: "say"
+  name: 'say'
 }
